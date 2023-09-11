@@ -13,7 +13,11 @@
         <td>Stock</td><td><input type="text" v-model="product.stock"/></td>
         <td>Brand</td><td><input type="text" v-model="product.brand"/></td>
       </tr>
-      <tr><button type="submit" @click.prevent="action=='add' ? addProduct(): updateProduct()">{{ action=='add'? 'Add Product':'Update Product' }}</button></tr>
+      <tr>
+        <td colspan="3">
+        <button type="submit" @click.prevent="action=='add' ? addProduct(): updateProduct()">{{ action=='add'? 'Add Product':'Update Product' }}</button>
+      </td>
+    </tr>
     </table>
     <table>
       <tr>
@@ -92,12 +96,14 @@ export default {
       });
     },
     deleteProduct(product) {
-      axios.delete('https://dummyjson.com/products/'+product.id)
-      .then(() => {
-        this.getProducts();
-      }).catch((err) => {
-        console.log(err);
-      });
+      if(confirm('Sure to delete?')) {
+        axios.delete('https://dummyjson.com/products/'+product.id)
+        .then(() => {
+          this.getProducts();
+        }).catch((err) => {
+          console.log(err);
+        });
+      }
     }
   },
   mounted() {

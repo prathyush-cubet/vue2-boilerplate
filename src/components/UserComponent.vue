@@ -13,7 +13,11 @@
           <td>email</td><td><input type="text" v-model="user.email"/></td>
           <td>phone</td><td><input type="text" v-model="user.phone"/></td>
         </tr>
-        <tr><button type="submit" @click.prevent="action=='add' ? addUser(): updateUser()">{{ action=='add'? 'Add User':'Update User' }}</button></tr>
+        <tr>
+          <td colspan="3">
+           <button type="submit" @click.prevent="action=='add' ? addUser(): updateUser()">{{ action=='add'? 'Add User':'Update User' }}</button>
+          </td>
+        </tr>
       </table>
       <table>
         <tr>
@@ -92,12 +96,15 @@
         });
       },
       deleteUser(user) {
-        axios.delete('https://dummyjson.com/users/'+user.id)
-        .then(() => {
-          this.getUsers();
-        }).catch((err) => {
-          console.log(err);
-        });
+        if(confirm('Sure to delete?')) {
+          axios.delete('https://dummyjson.com/users/'+user.id)
+          .then(() => {
+            this.getUsers();
+          }).catch((err) => {
+            console.log(err);
+          });
+        }
+
       }
     },
     mounted() {

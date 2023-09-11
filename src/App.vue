@@ -9,8 +9,10 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <router-link to="/products">Go to Peoducts</router-link>
-        <router-link to="/users">Go to Users</router-link>
+
+        <router-link class="col" to="/products">Products</router-link>
+        <router-link class="col" to="/users">Users</router-link>
+        <router-link class="col" to="/example">Props&Emits</router-link>
       </b-navbar-nav>
 
     </b-collapse>
@@ -35,6 +37,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+.active {
+  font-weight: 700;
+  color:#fff
 }
 </style>
