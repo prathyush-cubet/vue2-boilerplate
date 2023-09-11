@@ -76,7 +76,7 @@ export default {
         ...this.product
       })
       .then(() => {
-        this.getProducts();
+        this.products.unshift(this.product)
       }).catch((err) => {
         console.log(err);
       });
@@ -90,7 +90,7 @@ export default {
         ...this.product
       })
       .then(() => {
-        this.getProducts();
+        this.products= this.products.map((item) => (item.id === this.product.id ? { ...item, ...this.product } : item))
       }).catch((err) => {
         console.log(err);
       });

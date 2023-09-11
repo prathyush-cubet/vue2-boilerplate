@@ -76,7 +76,7 @@
           ...this.user
         })
         .then(() => {
-          this.getUsers();
+          this.users.unshift(this.user)
         }).catch((err) => {
           console.log(err);
         });
@@ -90,7 +90,7 @@
           ...this.user
         })
         .then(() => {
-          this.getUsers();
+          this.users= this.users.map((item) => (item.id === this.user.id ? { ...item, ...this.user } : item))
         }).catch((err) => {
           console.log(err);
         });
