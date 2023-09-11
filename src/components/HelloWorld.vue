@@ -30,7 +30,7 @@
         <th>Stock</th>
         <th>Brand</th>
       </tr>
-      <tr v-for="product in products" :key="product.id">
+      <tr v-for="(product,index) in products" :key="product.id">
         <td>{{ product.title }}</td>
         <td>{{ product.category }}</td>
         <td>{{ product.description }}</td>
@@ -41,7 +41,7 @@
         <td>{{ product.brand }}</td>
         <td>
           <a href="#" @click.prevent="editProduct(product)">Edit</a>
-          <a href="#" @click.prevent="deleteProduct(product)">Delete</a>
+          <a href="#" @click.prevent="deleteProduct(product, index)">Delete</a>
         </td>
       </tr>
     </table>
@@ -97,12 +97,9 @@ export default {
     },
     deleteProduct(product) {
       if(confirm('Sure to delete?')) {
-        axios.delete('https://dummyjson.com/products/'+product.id)
-        .then(() => {
-          this.getProducts();
-        }).catch((err) => {
-          console.log(err);
-        });
+        this.products = this.products.filter((prd) => {
+          return prd.id !== product.id
+        })
       }
     }
   },

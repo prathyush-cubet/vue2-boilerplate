@@ -97,13 +97,10 @@
       },
       deleteUser(user) {
         if(confirm('Sure to delete?')) {
-          axios.delete('https://dummyjson.com/users/'+user.id)
-          .then(() => {
-            this.getUsers();
-          }).catch((err) => {
-            console.log(err);
-          });
-        }
+        this.users = this.users.filter((prd) => {
+          return prd.id !== user.id
+        })
+      }
 
       }
     },
